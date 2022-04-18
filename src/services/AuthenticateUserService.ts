@@ -1,6 +1,8 @@
 import axios from 'axios'; //importando axios para fazer chamadas externas
 import prismaClient from "../prisma";
-import { sign } from "jsonwebtoken"
+import { sign } from "jsonwebtoken";
+
+require('dotenv/config');
 
 interface IAccessTokenResponse {
     access_token: string;
@@ -28,7 +30,7 @@ class AuthenticateUserService {
                 "Accept": "application/json"
             }
         })
-
+ 
         const response = await axios.get<IUserResponse>("https://api.github.com/user", {
             headers: {
                 authorization: `Bearer ${accessTokenResponse.access_token}`
